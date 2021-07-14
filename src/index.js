@@ -1,17 +1,42 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+
+// Read All
+// Dados -> 'Nome' e 'URL da imagem'
+
+const lista = [
+  {
+    id: 1,
+    nome: "Bulbasaur",
+    imagemUrl:
+      "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png",
+  },
+];
+
+function Item() {
+  return <div>Item</div>;
+}
+
+function Lista() {
+  return (
+    <div>
+      <Item />
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <div>
+      <Lista />
+    </div>
+  );
+}
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
