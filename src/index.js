@@ -23,15 +23,21 @@ const lista = [
 function Item({ indice }) {
   const item = lista[indice];
 
-  return <div>{item.nome}</div>;
+  return (
+    <div>
+      {item.nome}
+      <br />
+      <img src={item.imagemUrl} alt={item.nome} width="200" />
+    </div>
+  );
 }
 
 function Lista() {
   return (
     <div>
-      {lista.map((item, index) => {
-        return <Item indice={index} />;
-      })}
+      {lista.map((item, index) => (
+        <Item key={index} indice={index} />
+      ))}
     </div>
   );
 }
