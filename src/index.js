@@ -29,8 +29,9 @@ function Item({ indice }) {
 function Lista() {
   return (
     <div>
-      <Item indice={0} />
-      <Item indice={1} />
+      {lista.map((item, index) => {
+        return <Item indice={index} />;
+      })}
     </div>
   );
 }
