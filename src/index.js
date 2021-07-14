@@ -12,16 +12,25 @@ const lista = [
     imagemUrl:
       "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png",
   },
+  {
+    id: 2,
+    nome: "Ivysaur",
+    imagemUrl:
+      "https://assets.pokemon.com/assets/cms2/img/pokedex/full/002.png",
+  },
 ];
 
-function Item() {
-  return <div>Item</div>;
+function Item({ indice }) {
+  const item = lista[indice];
+
+  return <div>{item.nome}</div>;
 }
 
 function Lista() {
   return (
     <div>
-      <Item />
+      <Item indice={0} />
+      <Item indice={1} />
     </div>
   );
 }
