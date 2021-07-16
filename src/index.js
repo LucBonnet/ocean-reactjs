@@ -24,9 +24,8 @@ function Item({ indice }) {
   const item = lista[indice];
 
   return (
-    <div>
-      {item.nome}
-      <br />
+    <div className="item">
+      <h1 className="item__title">{item.nome}</h1>
       <img src={item.imagemUrl} alt={item.nome} width="200" />
     </div>
   );
@@ -34,7 +33,7 @@ function Item({ indice }) {
 
 function Lista() {
   return (
-    <div>
+    <div className="lista">
       {lista.map((item, index) => (
         <Item key={index} indice={index} />
       ))}
@@ -43,16 +42,24 @@ function Lista() {
 }
 
 function Header() {
-  return <div>Header</div>;
+  return (
+    <header className="header">
+      <img
+        src="https://www.oceanbrasil.com/img/general/logoOceanI.png"
+        alt="Logo Samsung Ocean"
+        width="300"
+      />
+    </header>
+  );
 }
 
 function Footer() {
-  return <div>Footer</div>;
+  return <div className="footer">Footer</div>;
 }
 
 function App() {
   return (
-    <div>
+    <div className="app">
       <Header />
       <Lista />
       <Footer />
