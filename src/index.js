@@ -42,10 +42,20 @@ function Lista() {
   );
 }
 
+function Header() {
+  return <div>Header</div>;
+}
+
+function Footer() {
+  return <div>Footer</div>;
+}
+
 function App() {
   return (
     <div>
+      <Header />
       <Lista />
+      <Footer />
     </div>
   );
 }
