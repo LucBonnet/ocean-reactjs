@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./index.css";
 
 // Read All
@@ -9,8 +10,7 @@ const lista = [
   {
     id: 1,
     nome: "Bulbasaur",
-    imagemUrl:
-      "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png",
+    imagemUrl: `https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png`,
   },
   {
     id: 2,
@@ -18,16 +18,42 @@ const lista = [
     imagemUrl:
       "https://assets.pokemon.com/assets/cms2/img/pokedex/full/002.png",
   },
+  {
+    id: 3,
+    nome: "Venusaur",
+    imagemUrl:
+      "https://assets.pokemon.com/assets/cms2/img/pokedex/full/003.png",
+  },
+  {
+    id: 4,
+    nome: "Charmander",
+    imagemUrl:
+      "https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png",
+  },
+  {
+    id: 5,
+    nome: "Charmeleon",
+    imagemUrl:
+      "https://assets.pokemon.com/assets/cms2/img/pokedex/full/005.png",
+  },
+  {
+    id: 6,
+    nome: "Charizard",
+    imagemUrl:
+      "https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png",
+  },
 ];
 
 function Item({ indice }) {
   const item = lista[indice];
 
   return (
-    <div className="item">
-      <h1 className="item__title">{item.nome}</h1>
-      <img src={item.imagemUrl} alt={item.nome} width="200" />
-    </div>
+    <a href={`/visualizar/${item.id}`}>
+      <div className="item">
+        <h1 className="item__title">{item.nome}</h1>
+        <img src={item.imagemUrl} alt={item.nome} width="200" />
+      </div>
+    </a>
   );
 }
 
@@ -43,25 +69,48 @@ function Lista() {
 
 function Header() {
   return (
-    <header className="header">
-      <img
-        src="https://www.oceanbrasil.com/img/general/logoOceanI.png"
-        alt="Logo Samsung Ocean"
-        width="300"
-      />
-    </header>
+    <a href="/">
+      <header className="header">
+        <img
+          src="https://www.oceanbrasil.com/img/general/logoOceanI.png"
+          alt="Logo Samsung Ocean"
+          width="300"
+        />
+      </header>
+    </a>
   );
 }
 
 function Footer() {
-  return <div className="footer">Footer</div>;
+  return <footer className="footer">Todos os direitos reservados.</footer>;
+}
+
+function ListarItens() {
+  return (
+    <div>
+      <Lista />
+    </div>
+  );
+}
+
+function Visualizar(props) {
+  const id = props.match.params.id;
+
+  return (
+    <div className="visualizar">
+      <Item indice={id - 1} />
+    </div>
+  );
 }
 
 function App() {
   return (
     <div className="app">
       <Header />
-      <Lista />
+      <Switch>
+        <Route path="/" component={ListarItens} exact={true} />
+        <Route path="/visualizar/:id" component={Visualizar} />
+      </Switch>
       <Footer />
     </div>
   );
@@ -69,7 +118,9 @@ function App() {
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
