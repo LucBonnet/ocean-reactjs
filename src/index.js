@@ -93,15 +93,16 @@ function Lista() {
 
 function Header() {
   return (
-    <a href="/">
-      <header className="header">
+    <header className="header">
+      <a href="/">
         <img
           src="https://www.oceanbrasil.com/img/general/logoOceanI.png"
           alt="Logo Samsung Ocean"
           width="300"
         />
-      </header>
-    </a>
+      </a>
+      <a href="/adicionar">Adicionar Item</a>
+    </header>
   );
 }
 
@@ -152,20 +153,57 @@ function Visualizar(props) {
 }
 
 function AdicionarItem(props) {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault(event.target);
+
+    const nome = event.target.nome.value;
+    const imagemUrl = event.target.imagemUrl.value;
+
+    const dados = {
+      nome: nome,
+      imagemUrl: imagemUrl,
+    };
+
+    const dadosJson = JSON.stringify(dados);
+
+    const resultado = await fetch(`${ApiURL}/pokemons`, {
+      headers: new Headers({
+        "Content-Type": "application/json",
+      }),
+      method: "POST",
+      body: dadosJson,
+    });
+
+    console.log(resultado);
+
+    // const jsonResultado = await resultado.json();
+
+    // console.log(jsonResultado);
+
+    props.history.push("/");
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="nome">Nome:</label>
-        <input type="text" id="nome" />
+      <form className="form" onSubmit={handleSubmit}>
+        <label className="form__label" htmlFor="nome">
+          Nome:
+        </label>
+        <input className="form__input" type="text" id="nome" name="nome" />
         <br />
-        <label htmlFor="imagemUrl">Url da Imagem:</label>
-        <input type="url" id="imagemUrl" />
+        <label className="form__label" htmlFor="imagemUrl">
+          Url da Imagem:
+        </label>
+        <input
+          className="form__input"
+          type="url"
+          id="imagemUrl"
+          name="imagemUrl"
+        />
         <br />
-        <button type="submit">Adicionar</button>
+        <button className="form__submit" type="submit">
+          Adicionar
+        </button>
       </form>
     </div>
   );
