@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./index.css";
@@ -6,7 +6,7 @@ import "./index.css";
 // Read All
 // Dados -> 'Nome' e 'URL da imagem'
 
-const lista = [
+const list = [
   {
     id: 1,
     nome: "Bulbasaur",
@@ -44,8 +44,8 @@ const lista = [
   },
 ];
 
-function Item({ indice }) {
-  const item = lista[indice];
+function Item(props) {
+  const item = props.item;
 
   return (
     <a href={`/visualizar/${item.id}`}>
@@ -58,10 +58,30 @@ function Item({ indice }) {
 }
 
 function Lista() {
+  const [lista, setLista] = useState("");
+
+  useEffect(() => {
+    if (!lista) {
+      obterResultado();
+    }
+  });
+
+  const obterResultado = async () => {
+    const resultado = await fetch("http://localhost:3300/pokemons", {});
+
+    const dados = await resultado.json();
+
+    setLista(dados);
+  };
+
+  if (!lista) {
+    return <div>Carregando...</div>;
+  }
+
   return (
     <div className="lista">
       {lista.map((item, index) => (
-        <Item key={index} indice={index} />
+        <Item key={index} item={item} />
       ))}
     </div>
   );
